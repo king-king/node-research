@@ -2,23 +2,24 @@
  * Created by wangqun6 on 2017/3/24.
  */
 
-var os = require("os"),
+let os = require("os"),
     fs = require("fs");
 
-var enter_char = os.EOL;
+let enter_char = os.EOL;
 
 function writer(src) {
     // 仅处理utf-8的字符串
+    let stream;
     try {
-        var stream = fs.createWriteStream(src, {
+        stream = fs.createWriteStream(src, {
             flags: 'a'
         });
     } catch (e) {
         console.log(e);
     }
-    var bufferString = "";
-    var status = true;
-    var isClose = false;
+    let bufferString = "";
+    let status = true;
+    let isClose = false;
 
     function writeTosStream(str) {
         if (!isClose) {
@@ -54,7 +55,7 @@ function writer(src) {
     return {
         write: function (string) {
             if (!isClose) {
-                var str = string + enter_char;
+                let str = string + enter_char;
                 if (status) {
                     writeTosStream(str);
                 } else {
